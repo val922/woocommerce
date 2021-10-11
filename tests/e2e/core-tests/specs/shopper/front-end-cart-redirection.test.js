@@ -1,4 +1,3 @@
-/* eslint-disable jest/no-export, jest/no-disabled-tests, jest/expect-expect */
 /**
  * Internal dependencies
  */
@@ -9,6 +8,7 @@
 	setCheckbox,
 	unsetCheckbox,
 	settingsPageSaveChanges,
+	utils,
 } = require( '@woocommerce/e2e-utils' );
 
 /**
@@ -47,10 +47,10 @@ const runCartRedirectionTest = () => {
 			'//a[contains(@class, "add_to_cart_button") and contains(@class, "ajax_add_to_cart")';
 			const [ addToCartButton ] = await page.$x( addToCartXPath + ']' );
 			addToCartButton.click();
-			await page.waitFor(1000); // to avoid flakiness
+			await utils.waitForTimeout( 1000 ); // to avoid flakiness
 
 			await shopper.productIsInCart(simpleProductName);
-			await shopper.removeFromCart(simpleProductName);
+			await shopper.removeFromCart( simplePostIdValue );
 		});
 
 		it('can redirect user to cart from detail page', async () => {
@@ -58,10 +58,10 @@ const runCartRedirectionTest = () => {
 
 			// Add to cart from detail page
 			await shopper.addToCart();
-			await page.waitFor(1000); // to avoid flakiness
+			await utils.waitForTimeout( 1000 ); // to avoid flakiness
 
 			await shopper.productIsInCart(simpleProductName);
-			await shopper.removeFromCart(simpleProductName);
+			await shopper.removeFromCart( simplePostIdValue );
 		});
 
 		afterAll(async () => {

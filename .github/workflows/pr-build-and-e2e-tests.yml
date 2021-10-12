@@ -39,14 +39,14 @@ jobs:
                   path: plugins/woocommerce/package/woocommerce
 
             - name: Run npm install.
-              working-directory: plugins/woocommerce/package/woocommerce
+              working-directory: plugins/woocommerce/package/woocommerce/plugins/woocommerce
               run: |
                   echo "$(pwd)"
                   ls -a
                   npm install
 
             - name: Load docker images and start containers.
-              working-directory: plugins/woocommerce/package/woocommerce
+              working-directory: plugins/woocommerce/package/woocommerce/plugins/woocommerce
               run: |
                   echo "$(pwd)"
                   ls -a
